@@ -7,6 +7,7 @@
 //
 
 #import "CONumButton.h"
+#import "CONumButtonVerdictFactory.h"
 
 #define TAG_NAME_FIRST @"CONum_"
 
@@ -15,6 +16,9 @@
 #define CO_SUB_BUTTON_COLOR [UIColor blackColor]
 #define CO_ADD_BUTTON_COLOR [UIColor blackColor]
 #define CO_NUM_LABEL_COLOR [UIColor blackColor]
+
+#define WEAK_SELF(self) __weak typeof(self) weakself = self;
+#define STRONG_SELF(weakself) __strong typeof(weakself) self = weakself;
 
 #pragma mark - 操作按钮
 @implementation OptButton
@@ -143,34 +147,39 @@
 
 #pragma mark - 重新加载UI
 - (void)reloadUI{
+    id<CONumButtonDataSource> dataSource = self.dataSource;
     /* 宽度 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:width:)]){
+    WEAK_SELF(self)
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:width:) functionBlock:^{
+        STRONG_SELF(weakself)
         CGRect rect = self.frame;
-        CGFloat width = [_dataSource CONumButton:self width:CO_BUTTON_WIDTH];
+        CGFloat width = [dataSource CONumButton:self width:CO_BUTTON_WIDTH];
         self.frame = CGRectMake(rect.origin.x, rect.origin.y, width, rect.size.height);
         
         /* 移除视图 */
-        for (UIView *view in self.subviews) [view removeFromSuperview];
+        [self removeSuperView];
                 
         [self setUp:@"-" rightTitle:@"+"];
-    }
+    }];
     
     /* 高度 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:height:)]){
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:height:) functionBlock:^{
+        STRONG_SELF(weakself)
         CGRect rect = self.frame;
-        CGFloat height = [_dataSource CONumButton:self height:CO_BUTTON_HEIGHT];
+        CGFloat height = [dataSource CONumButton:self height:CO_BUTTON_HEIGHT];
         self.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, height);
         
         /* 移除视图 */
-        for (UIView *view in self.subviews) [view removeFromSuperview];
+        [self removeSuperView];
                 
         [self setUp:@"-" rightTitle:@"+"];
-    }
+    }];
     
     /* 标签宽度 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:widthOfLable:)]) {
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:widthOfLable:) functionBlock:^{
+        STRONG_SELF(weakself)
         /* 设置默认的宽度 */
-        CGFloat width = [_dataSource CONumButton:self widthOfLable:self.numLabel.frame.size.width];
+        CGFloat width = [dataSource CONumButton:self widthOfLable:self.numLabel.frame.size.width];
         /* 修改计数标签长度 */
         CGRect bounds = self.bounds;
         CGFloat frame_W = bounds.size.width;
@@ -181,59 +190,72 @@
         CGRect subFrame = self.subButton.frame;
         CGRect addFrame = self.addButton.frame;
         CGRect numLFrame = self.numLabel.frame;
-        
+       
         CGFloat button_W = (frame_W - width) * 0.5;
-        self.subButton.frame = CGRectMake(subFrame.origin.x, subFrame.origin.y, button_W, subFrame.size.height);
-        self.addButton.frame = CGRectMake(button_W + width, addFrame.origin.y, button_W, addFrame.size.height);
+        self.subButton.frame = CGRectMake(subFrame.origin.x, subFrame.origin.y,  button_W, subFrame.size.height);
+        self.addButton.frame = CGRectMake(button_W + width, addFrame.origin.y,   button_W, addFrame.size.height);
         self.numLabel.frame = CGRectMake(button_W, numLFrame.origin.y, width, numLFrame.size.height);
-    }
+    }];
     
     /* 边框颜色 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:borderColor:)]) {
-        UIColor *borderColor = [_dataSource CONumButton:self borderColor:CO_BUTTON_BORDER_COLOR];
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:borderColor:) functionBlock:^{
+        STRONG_SELF(weakself)
+        UIColor *borderColor = [dataSource CONumButton:self borderColor:CO_BUTTON_BORDER_COLOR];
         self.layer.borderColor = borderColor.CGColor;
-    }
+    }];
     
     /* 计数标签边框颜色 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:numLabelBorderColor:)]){
-        UIColor *numLabelBorderColor = [_dataSource CONumButton:self numLabelBorderColor:CO_NUM_LABEL_BORDER_COLOR];
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:numLabelBorderColor:) functionBlock:^{
+        STRONG_SELF(weakself)
+        UIColor *numLabelBorderColor = [dataSource CONumButton:self numLabelBorderColor:CO_NUM_LABEL_BORDER_COLOR];
         self.numLabel.layer.borderColor = numLabelBorderColor.CGColor;
-    }
-    
+    }];
+
     /* 操作按钮字体颜色 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:subFontColor:)]){
-        UIColor *fontColor = [_dataSource CONumButton:self subFontColor:CO_SUB_BUTTON_COLOR];
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:subFontColor:) functionBlock:^{
+        STRONG_SELF(weakself)
+        UIColor *fontColor = [dataSource CONumButton:self subFontColor:CO_SUB_BUTTON_COLOR];
         [self.subButton setTitleColor:fontColor forState:UIControlStateNormal];
-    }
-    
-    if ([_dataSource respondsToSelector:@selector(CONumButton:addFontColor:)]){
-         UIColor *fontColor = [_dataSource CONumButton:self addFontColor:CO_ADD_BUTTON_COLOR];
-         [self.addButton setTitleColor:fontColor forState:UIControlStateNormal];
-    }
-    
+    }];
+
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:addFontColor:) functionBlock:^{
+        STRONG_SELF(weakself)
+        UIColor *fontColor = [dataSource CONumButton:self addFontColor:CO_ADD_BUTTON_COLOR];
+        [self.addButton setTitleColor:fontColor forState:UIControlStateNormal];
+    }];
+
     /* 计数标签字体颜色 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:numLabelFontColor:)]){
-        UIColor *fontColor = [_dataSource CONumButton:self numLabelFontColor:CO_NUM_LABEL_COLOR];
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:numLabelFontColor:) functionBlock:^{
+        STRONG_SELF(weakself)
+        UIColor *fontColor = [dataSource CONumButton:self numLabelFontColor:CO_NUM_LABEL_COLOR];
         self.numLabel.textColor = fontColor;
-    }
-    
+    }];
+
     /* 计数标签字体大小 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:numLabelFontSize:)]){
-        NSUInteger fontSize = [_dataSource CONumButton:self numLabelFontSize:0];
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:numLabelFontSize:) functionBlock:^{
+        STRONG_SELF(weakself)
+        NSUInteger fontSize = [dataSource CONumButton:self numLabelFontSize:0];
         [self.numLabel setFont:[UIFont systemFontOfSize:fontSize]];
-    }
+    }];
     
     /* 边框宽度 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:borderWidth:)]){
-        CGFloat borderWidth = [_dataSource CONumButton:self borderWidth:self.layer.borderWidth];
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:borderWidth:) functionBlock:^{
+        STRONG_SELF(weakself)
+        CGFloat borderWidth = [dataSource CONumButton:self borderWidth:self.layer.borderWidth];
         self.layer.borderWidth = borderWidth;
-    }
-    
+    }];
+
     /* 计数标签边框宽度 */
-    if ([_dataSource respondsToSelector:@selector(CONumButton:numLabelBorderWidth:)]){
-        CGFloat borderWidth = [_dataSource CONumButton:self numLabelBorderWidth:self.numLabel.layer.borderWidth];
+    [CONumButtonVerdictFactory executeVerdict:_dataSource aSelector:@selector(CONumButton:numLabelBorderWidth:) functionBlock:^{
+        STRONG_SELF(weakself)
+        CGFloat borderWidth = [dataSource CONumButton:self numLabelBorderWidth:self.numLabel.layer.borderWidth];
         self.numLabel.layer.borderWidth = borderWidth;
-    }
+    }];
+}
+
+#pragma mark - 移除视图
+- (void)removeSuperView{
+    for (UIView *view in self.subviews) [view removeFromSuperview];
 }
 
 @end

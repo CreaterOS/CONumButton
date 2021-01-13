@@ -1,6 +1,7 @@
+
 //
-//  conumButtonUITests.m
-//  conumButtonUITests
+//  CONumButtonUITests.m
+//  CONumButtonUITests
 //
 //  Created by Bryant Reyn on 2021/1/9.
 //  Copyright © 2021 Bryant Reyn. All rights reserved.
@@ -8,11 +9,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface conumButtonUITests : XCTestCase
+@interface CONumButtonUITests : XCTestCase
 
 @end
 
-@implementation conumButtonUITests
+@implementation CONumButtonUITests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.

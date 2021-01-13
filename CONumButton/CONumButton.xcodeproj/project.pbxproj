@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		041F3D8625AE803400E4CFD9 /* CONumButtonVerdictFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F3D8525AE803400E4CFD9 /* CONumButtonVerdictFactory.m */; };
 		6843E8FD25A9E8DF0018E0D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6843E8FC25A9E8DF0018E0D5 /* AppDelegate.m */; };
 		6843E90025A9E8DF0018E0D5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6843E8FF25A9E8DF0018E0D5 /* SceneDelegate.m */; };
 		6843E90325A9E8DF0018E0D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6843E90225A9E8DF0018E0D5 /* ViewController.m */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041F3D8425AE803400E4CFD9 /* CONumButtonVerdictFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CONumButtonVerdictFactory.h; sourceTree = "<group>"; };
+		041F3D8525AE803400E4CFD9 /* CONumButtonVerdictFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CONumButtonVerdictFactory.m; sourceTree = "<group>"; };
 		6843E8F825A9E8DF0018E0D5 /* CoNumButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoNumButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6843E8FB25A9E8DF0018E0D5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6843E8FC25A9E8DF0018E0D5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 			children = (
 				6843E93625A9EA5E0018E0D5 /* CONumButton.h */,
 				6843E93525A9EA5E0018E0D5 /* CONumButton.m */,
+				041F3D8425AE803400E4CFD9 /* CONumButtonVerdictFactory.h */,
+				041F3D8525AE803400E4CFD9 /* CONumButtonVerdictFactory.m */,
 			);
 			path = CONumButton;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				6843E93725A9EA5E0018E0D5 /* CONumButton.m in Sources */,
 				6843E90325A9E8DF0018E0D5 /* ViewController.m in Sources */,
 				6843E8FD25A9E8DF0018E0D5 /* AppDelegate.m in Sources */,
+				041F3D8625AE803400E4CFD9 /* CONumButtonVerdictFactory.m in Sources */,
 				6843E90E25A9E8E40018E0D5 /* main.m in Sources */,
 				6843E90025A9E8DF0018E0D5 /* SceneDelegate.m in Sources */,
 			);
