@@ -30,62 +30,62 @@
 
 #pragma mark - CONumButtonDelegate,CONumButtonDataSource
 - (void)clickCONumButton:(OptButton *)button numLabel:(UILabel *)numLabel{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     NSLog(@"tagName: %@, numLabel: %@",button.tagName,numLabel.text);
 }
 
 - (CGFloat)CONumButton:(CONumButton *)coNumButton width:(CGFloat)width{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return 150;
 }
 
 - (CGFloat)CONumButton:(CONumButton *)coNumButton height:(CGFloat)height{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return 44;
 }
 
 - (CGFloat)CONumButton:(CONumButton *)coNumButton widthOfLable:(CGFloat)width{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return 70;
 }
 
 - (UIColor *)CONumButton:(CONumButton *)coNumButton borderColor:(UIColor *)borderColor{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return [UIColor systemGray3Color];
 }
 
 - (UIColor *)CONumButton:(CONumButton *)coNumButton numLabelBorderColor:(UIColor *)borderColor{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return [UIColor systemGray3Color];
 }
 
 - (UIColor *)CONumButton:(CONumButton *)button subFontColor:(UIColor *)fontColor{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return [UIColor systemOrangeColor];
 }
 
 - (UIColor *)CONumButton:(CONumButton *)button addFontColor:(UIColor *)fontColor{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return [UIColor systemPurpleColor];
 }
 
 - (UIColor *)CONumButton:(CONumButton *)button numLabelFontColor:(UIColor *)fontColor{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return [UIColor systemYellowColor];
 }
 
 - (NSUInteger)CONumButton:(CONumButton *)button numLabelFontSize:(NSUInteger)fontSize{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return 30;
 }
 
 - (CGFloat)CONumButton:(CONumButton *)button borderWidth:(CGFloat)borderWidth{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return 1;
 }
 
 - (CGFloat)CONumButton:(CONumButton *)button numLabelBorderWidth:(CGFloat)numLabelBorderWidth{
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     return 1;
 }
 
