@@ -8,7 +8,7 @@
 
 #import "CONumButton.h"
 #import "CONumButtonVerdictFactory.h"
-#import <objc/runtime.h>
+#import "CORuntime.h"
 
 #define TAG_NAME_FIRST @"CONum_"
 
@@ -67,29 +67,10 @@
 #pragma mark - 懒加载
 - (NSMutableArray *)aSelectArr{
     if (!_aSelectArr) {
-        _aSelectArr = [self getMethodForDataSource];
-        
+        _aSelectArr = [CORuntime getMethodForDataSource:self.dataSource keywords:@"CONumButton"];
     }
     
     return _aSelectArr;
-}
-
-#pragma mark - 获得方法
-- (NSMutableArray *)getMethodForDataSource{
-    NSMutableArray *aSelectDataSourceArr = [NSMutableArray array];
-    
-    unsigned int count;
-    Method *methods = class_copyMethodList([self.dataSource class], &count);
-    for (unsigned int i = 0; i < count; i++) {
-        Method method = methods[i];
-        NSString *selStr = NSStringFromSelector(method_getName(method));
-        if ([selStr length] != 0 && [selStr containsString:@"CONumButton"] && [selStr characterAtIndex:0] == 'C') {
-            [aSelectDataSourceArr addObject:selStr];
-        }
-    }
-    free(methods);
-    
-    return aSelectDataSourceArr;
 }
 
 #pragma mark - 初始化
